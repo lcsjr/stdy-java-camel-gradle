@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.reinf.esocial.gov.br/schemas/evtInfoContribuinte/v1_04_00" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Reinf">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="evtInfoContri">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ideEvento">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="tpAmb" type="xs:unsignedByte" />
+                    <xs:element name="procEmi" type="xs:unsignedByte" />
+                    <xs:element name="verProc" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ideContri">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="tpInsc" type="xs:unsignedByte" />
+                    <xs:element name="nrInsc" type="xs:unsignedInt" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="infoContri">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="inclusao">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="idePeriodo">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="iniValid" type="xs:gYearMonth" />
+                                <xs:element name="fimValid" type="xs:gYearMonth" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="infoCadastro">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="classTrib" type="xs:unsignedByte" />
+                                <xs:element name="indEscrituracao" type="xs:unsignedByte" />
+                                <xs:element name="indDesoneracao" type="xs:unsignedByte" />
+                                <xs:element name="indAcordoIsenMulta" type="xs:unsignedByte" />
+                                <xs:element name="indSitPJ" type="xs:unsignedByte" />
+                                <xs:element name="contato">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="nmCtt" type="xs:string" />
+                                      <xs:element name="cpfCtt" type="xs:unsignedLong" />
+                                      <xs:element name="foneFixo" type="xs:unsignedInt" />
+                                      <xs:element name="foneCel" type="xs:unsignedInt" />
+                                      <xs:element name="email" type="xs:string" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="softHouse">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="cnpjSoftHouse" type="xs:unsignedLong" />
+                                      <xs:element name="nmRazao" type="xs:string" />
+                                      <xs:element name="nmCont" type="xs:string" />
+                                      <xs:element name="telefone" type="xs:unsignedInt" />
+                                      <xs:element name="email" type="xs:string" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -3,6 +3,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'maven-publish'
+    id "com.ewerk.gradle.plugins.jaxb2" version "1.0.9"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -11,8 +12,8 @@ group = 'br.com.camel'
 version = '1.0-SNAPSHOT'
 description = 'Estudo Java com Gradle para implementação Apache Camel'
 
-sourceCompatibility = 1.8
-sourceCompatibility = 1.8
+sourceCompatibility = 11
+sourceCompatibility = 11
 
 configurations {
 	developmentOnly
@@ -29,40 +30,58 @@ repositories {
     maven { url = 'http://repo.maven.apache.org/maven2' }
 }
 
+jaxb2 {
+  xjc {
+    'request-classes' {
+      basePackage = 'br.com.spring.model.request'
+      schema = 'src/main/resources/reinf.xsd'
+      encoding = 'UTF-8'
+      extension = true 
+    }
+  }
+/*
+  xjc {
+    'response-classes' {
+      basePackage = 'br.com.spring.model.response'
+      schema = 'src/main/resources/reinf.xsd'
+    }
+  }
+ */
+}
+  
 dependencies {
 
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.apache.camel:camel-jpa:2.24.0'
+	implementation 'org.springframework.boot:spring-boot-starter-web-services'
+	implementation 'wsdl4j:wsdl4j'
+
+	// 	JAXB for Java 11 -->
+	implementation 'javax.xml.bind:jaxb-api' //:2.3.1
+	implementation 'com.sun.xml.bind:jaxb-core:2.2.11'
+	implementation 'com.sun.xml.bind:jaxb-impl:2.2.11'
+	compile group: 'org.glassfish.main.javaee-api', name: 'javax.jws', version: '3.1.2.2'
+	compile group: 'com.sun.activation', name: 'javax.activation', version: '1.2.0'
+	
+	
+	
 	implementation 'org.apache.camel:camel-spring-boot-starter:2.24.0'
-	implementation 'org.apache.camel:camel-core:2.24.0'
+	implementation 'org.apache.camel:camel-cxf:2.24.0'
+	compile group: 'org.apache.cxf', name: 'cxf-core', version: '3.3.2'
+	implementation 'org.apache.camel:camel-soap:2.3.0'
+	
+	implementation 'org.apache.camel:camel-jpa:2.24.0'
 	implementation 'org.apache.camel:camel-xstream:2.24.0'
 	implementation 'com.thoughtworks.xstream:xstream:1.4.8'
-    implementation 'xml-apis:xml-apis:1.0.b2'
     	
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
 	
-	
-	/*
-    implementation 'org.apache.camel:camel-core:2.16.0'
-    implementation 'org.apache.camel:camel-xmljson:2.16.0'
-    implementation 'org.apache.camel:camel-jms:2.16.0'
-    implementation 'org.apache.camel:camel-http4:2.16.0'
-       
-    implementation 'org.apache.activemq:activemq-camel:5.6.0'
-    
-    implementation 'xom:xom:1.2.5'
-    implementation 'xml-apis:xml-apis:1.0.b2'
-    
-    implementation 'org.apache.logging.log4j:log4j-api:2.4'
-    implementation 'org.apache.logging.log4j:log4j-core:2.4'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
-    implementation 'org.slf4j:slf4j-api:1.7.12'
-		*/
+    implementation 'org.apache.commons:commons-lang3:3.9'
+
 }
 
 bootJar {
