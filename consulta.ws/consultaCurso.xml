@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cour="http://stdy-soap.com.br/courses">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cour:GetCourseDetailsRequest>
+         <cour:id>1</cour:id>
+      </cour:GetCourseDetailsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

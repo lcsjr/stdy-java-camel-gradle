@@ -29,25 +29,6 @@ repositories {
     mavenLocal()
     maven { url = 'http://repo.maven.apache.org/maven2' }
 }
-
-jaxb2 {
-  xjc {
-    'request-classes' {
-      basePackage = 'br.com.spring.model.request'
-      schema = 'src/main/resources/reinf.xsd'
-      encoding = 'UTF-8'
-      extension = true 
-    }
-  }
-/*
-  xjc {
-    'response-classes' {
-      basePackage = 'br.com.spring.model.response'
-      schema = 'src/main/resources/reinf.xsd'
-    }
-  }
- */
-}
   
 dependencies {
 
@@ -65,18 +46,23 @@ dependencies {
 	implementation 'javax.xml.bind:jaxb-api' //:2.3.1
 	implementation 'com.sun.xml.bind:jaxb-core:2.2.11'
 	implementation 'com.sun.xml.bind:jaxb-impl:2.2.11'
-	compile group: 'org.glassfish.main.javaee-api', name: 'javax.jws', version: '3.1.2.2'
-	compile group: 'com.sun.activation', name: 'javax.activation', version: '1.2.0'
+	implementation group: 'org.glassfish.main.javaee-api', name: 'javax.jws', version: '3.1.2.2'
+	implementation group: 'com.sun.activation', name: 'javax.activation', version: '1.2.0'
 	
 	
 	
-	implementation 'org.apache.camel:camel-spring-boot-starter:2.24.0'
-	implementation 'org.apache.camel:camel-cxf:2.24.0'
-	compile group: 'org.apache.cxf', name: 'cxf-core', version: '3.3.2'
-	implementation 'org.apache.camel:camel-soap:2.3.0'
+	implementation group: 'org.apache.camel', name: 'camel-spring-boot-starter', version: "${property('camel.version')}"
+	implementation group: 'org.apache.camel', name: 'camel-cxf-starter', version: "${property('camel.version')}"
+	//implementation group: 'org.apache.camel', name: 'camel-cxf', version: '3.0.0-M4'
+	//implementation group: 'org.apache.cxf', name: 'cxf-core', version: '3.3.2'
+	implementation group: 'org.apache.camel', name: 'camel-core', version: "${property('camel.version')}"
+	implementation group: 'org.apache.camel', name: 'camel-soap', version: "${property('camel.version')}"
+	implementation group: 'org.apache.camel', name: 'camel-http4-starter', version: "${property('camel.version')}"
+
+	//implementation 'org.apache.camel:camel-http4:3.0.0-M4'
 	
-	implementation 'org.apache.camel:camel-jpa:2.24.0'
-	implementation 'org.apache.camel:camel-xstream:2.24.0'
+	implementation 'org.apache.camel:camel-jpa:2.23.0'
+	implementation 'org.apache.camel:camel-xstream:2.23.0'
 	implementation 'com.thoughtworks.xstream:xstream:1.4.8'
     	
 	

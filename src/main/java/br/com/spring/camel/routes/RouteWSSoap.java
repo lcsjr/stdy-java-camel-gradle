@@ -5,8 +5,6 @@ import java.net.URL;
 import javax.xml.namespace.QName;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.dataformat.soap.name.ServiceInterfaceStrategy;
-import org.apache.camel.model.dataformat.SoapJaxbDataFormat;
 import org.springframework.stereotype.Component;
 
 import br.com.spring.model.Curso;
@@ -16,17 +14,21 @@ import br.com.stdy_soap.courses.GetCourseDetailsRequest;
 import br.com.stdy_soap.courses.GetCourseDetailsResponse;
 
 @Component
-public class RouteSendToWSSoap extends RouteBuilder {
+public class RouteWSSoap extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
 
-		from("file:consulta.curso?delay=5s&noop=true")
-		.routeId("route-SendToWSSoap")
+		from("file:consulta.ws?delay=5s&noop=true")
+		.routeId("route-WSSoap")
 			.setHeader("ID_CURSO", xpath("//*[local-name()='id']/text()"))
 			.log("Pesquisando curso ID ${header.id_curso}")
 			.log("${body}")
 			.to("file:saida")
+//			.to("cxf://http://localhost:8080/ws/courses"
+//				    + "?serviceClass=br.com.stdy_soap.courses.CoursePortService"
+//				    + "&wsdlURL=http://localhost:8080/ws/courses.wsdl")
+//			.log("${body}")
 			.process(exchange->{
 				String xml = exchange.getIn().getBody(String.class);
 				System.out.println(xml);
